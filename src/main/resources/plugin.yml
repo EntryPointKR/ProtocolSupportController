@@ -1,0 +1,7 @@
+main: kr.rvs.pscontroller.ProtocolSupportController
+name: ProtocolSupportController
+version: 1.0
+author: EntryPoint
+depend: [ProtocolSupport]
+commands:
+  pscreload:
