@@ -10,7 +10,7 @@ import protocolsupport.api.ProtocolSupportAPI;
 import protocolsupport.api.ProtocolVersion;
 import protocolsupport.api.remapper.BlockRemapperControl;
 import protocolsupport.api.remapper.ItemRemapperControl;
-import protocolsupport.utils.ProtocolVersionsHelper;
+import protocolsupport.protocol.utils.ProtocolVersionsHelper;
 
 import java.io.File;
 import java.io.IOException;
@@ -36,7 +36,7 @@ public class ConfigHandler {
         if (configFile.isFile()) {
             config = YamlConfiguration.loadConfiguration(configFile);
             // Config checking
-            for (ProtocolVersion version : ProtocolVersionsHelper.ALL) {
+            for (ProtocolVersion version : ProtocolVersionsHelper.ALL_PC) {
                 String versionStr = CONNECTION_SEP + getVersionString(version);
                 if (!config.contains(versionStr)) {
                     config.set(versionStr, true);
@@ -45,7 +45,7 @@ public class ConfigHandler {
         } else {
             config = new YamlConfiguration();
             // Connection
-            for (ProtocolVersion version : ProtocolVersionsHelper.ALL) {
+            for (ProtocolVersion version : ProtocolVersionsHelper.ALL_PC) {
                 config.set(CONNECTION_SEP + getVersionString(version), true);
             }
             // Kick title
@@ -133,7 +133,7 @@ public class ConfigHandler {
 
     private static void setRemapData(boolean isBlock) {
         List<RemapData> remapDataList = getRemapData(isBlock);
-        for (ProtocolVersion version : ProtocolVersionsHelper.ALL) {
+        for (ProtocolVersion version : ProtocolVersionsHelper.ALL_PC) {
             if (isBlock) {
                 BlockRemapperControl control = ProtocolSupportAPI.getBlockRemapper(version);
                 for (RemapData remapData : remapDataList) {
